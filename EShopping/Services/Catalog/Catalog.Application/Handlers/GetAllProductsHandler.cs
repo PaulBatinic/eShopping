@@ -11,7 +11,7 @@ public class GetAllProductsHandler: IRequestHandler<GetAllProductsQuery, IList<P
 {
     private readonly IProductRepository _productRepository;
 
-    public GetAllProductsHandler(IProductRepository productRepository, ILogger<GetAllProductsHandler> logger)
+    public GetAllProductsHandler(IProductRepository productRepository)
     {
         _productRepository = productRepository;
     }
