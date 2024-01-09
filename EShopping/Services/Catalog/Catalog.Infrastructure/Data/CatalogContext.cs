@@ -12,6 +12,8 @@ public class CatalogContext : ICatalogContext
 
     public CatalogContext(IConfiguration configuration)
     {
+        string connectionstring = configuration.GetValue<string>("DatabaseSettings:ConnectionString");
+
         var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
         var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
         Brands = database.GetCollection<ProductBrand>(
@@ -21,8 +23,8 @@ public class CatalogContext : ICatalogContext
         Products = database.GetCollection<Product>(
             configuration.GetValue<string>("DatabaseSettings:CollectionName"));
         
-        BrandContextSeed.SeedData(Brands);
-        TypeContextSeed.SeedData(Types);
-        CatalogContextSeed.SeedData(Products);
+        BrandContextSeed.SeedData(Brands, connectionstring.Contains("localhost"));
+        TypeContextSeed.SeedData(Types, connectionstring.Contains("localhost"));
+        CatalogContextSeed.SeedData(Products, connectionstring.Contains("localhost"));
     }
 }
