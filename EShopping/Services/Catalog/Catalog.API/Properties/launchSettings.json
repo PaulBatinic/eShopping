@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5027"
+      "applicationUrl": "http://localhost:5157"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -27,11 +27,11 @@
       },
       "publishAllPorts": true
     },
-    "Catalog.API": {
+    "Basket.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:9000",
+      "applicationUrl": "http://localhost:9001",
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -43,7 +43,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:56176",
+      "applicationUrl": "http://localhost:30785",
       "sslPort": 0
     }
   }
