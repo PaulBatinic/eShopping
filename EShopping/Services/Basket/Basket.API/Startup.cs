@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
+using Basket.Application.GrpcService;
 using Basket.Application.Handlers;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Repositories;
+using Discount.Grpc.Protos;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -22,17 +24,18 @@ public class Startup
   {
     services.AddControllers();
     services.AddApiVersioning();
-
     //Redis Settings
     services.AddStackExchangeRedisCache(options =>
     {
       options.Configuration = Configuration.GetValue<string>("CacheSettings:ConnectionString");
     });
-
     services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateShoppingCartCommandHandler).GetTypeInfo().Assembly));
-
     services.AddScoped<IBasketRepository, BasketRepository>();
     services.AddAutoMapper(typeof(Startup));
+    services.AddScoped<DiscountGrpcService>();
+    services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
+        (o => o.Address = new Uri(Configuration["GrpcSettings:DiscountUrl"]));
+
     services.AddSwaggerGen(c =>
     {
       c.SwaggerDoc("v1", new OpenApiInfo { Title = "Basket.API", Version = "v1" });
