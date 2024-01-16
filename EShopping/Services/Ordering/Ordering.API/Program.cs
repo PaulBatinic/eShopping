@@ -1,32 +1,25 @@
-var builder = WebApplication.CreateBuilder(args);
+using Ordering.API.Extensions;
+using Ordering.Infrastructure.Data;
 
-// Add services to the container.
+namespace Ordering.API;
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-
-var summaries = new[]
+public class Program
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args)
+            .Build()
+            .MigrateDatabase<OrderContext>((context, services) =>
+            {
+                var logger = services.GetService<ILogger<OrderContextSeed>>();
+                OrderContextSeed.SeedAsync(context, logger).Wait();
+            }).Run();
+    }
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-});
-
-app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
 }
