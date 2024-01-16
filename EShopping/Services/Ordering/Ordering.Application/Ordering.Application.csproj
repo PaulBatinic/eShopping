@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Behaviour\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
   <ItemGroup>
