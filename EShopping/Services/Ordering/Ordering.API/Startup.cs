@@ -1,6 +1,9 @@
+using EventBus.Messages.Common;
 using HealthChecks.UI.Client;
+using MassTransit;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.OpenApi.Models;
+using Ordering.API.EventBusConsumer;
 using Ordering.Application.Extensions;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.Extensions;
@@ -28,6 +31,21 @@ public class Startup
             c.SwaggerDoc("v1", new OpenApiInfo {Title = "Ordering.API", Version = "v1"});
         });
         services.AddHealthChecks().Services.AddDbContext<OrderContext>();
+        services.AddMassTransit(config =>
+        {
+            // Mark this as consumer
+            config.AddConsumer<BasketOrderingConsumer>();
+            config.UsingRabbitMq((ctx, cfg) =>
+            {
+                cfg.Host(Configuration["EventBusSettings:HostAddress"]);
+                // Provide the queue name with consumer settings
+                cfg.ReceiveEndpoint(EventBusConstants.BasketCheckoutQueue, c =>
+                {
+                    c.ConfigureConsumer<BasketOrderingConsumer>(ctx);
+                });
+            });
+        });
+        services.AddMassTransitHostedService();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
