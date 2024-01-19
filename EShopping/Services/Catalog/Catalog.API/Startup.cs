@@ -10,6 +10,8 @@ using Catalog.Infrastructure.Repositories;
 using HealthChecks.UI.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Catalog.API;
 
@@ -24,7 +26,7 @@ public class Startup
 
   public void ConfigureServices(IServiceCollection services)
   {
-    services.AddControllers();
+    //services.AddControllers();
     services.AddApiVersioning();
 
     services.AddHealthChecks()
@@ -41,13 +43,22 @@ public class Startup
     services.AddScoped<ITypesRepository, ProductRepository>();
 
     // Identity server changes
-    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-       .AddJwtBearer(options =>
-       {
-           options.Authority = "https://localhost:9009";
-           options.Audience = "Catalog";
-       });
-    }
+    var userPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+    
+    services.AddControllers(config =>
+    {
+        config.Filters.Add(new AuthorizeFilter(userPolicy));
+    });
+
+     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://localhost:9009";
+        options.Audience = "Catalog";
+    });
+  }
 
   public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
   {
