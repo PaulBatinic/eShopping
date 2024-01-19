@@ -47,7 +47,15 @@ namespace EShopping.Identity
                     ClientId = "CatalogApiClient",
                     ClientSecrets = {new Secret("5c6eb3b4-61a7-4668-ac57-2b4591ec26d2".Sha256())},
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = {"catalogapi", "basketapi"}
+                    AllowedScopes = {"catalogapi"}
+                },
+                new Client
+                {
+                    ClientName = "Basket API Client",
+                    ClientId = "BasketApiClient",
+                    ClientSecrets = {new Secret("5c6ec4c5-61a7-4668-ac57-2b4591ec26d2".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes = {"basketapi"}
                 }
             };
     }
