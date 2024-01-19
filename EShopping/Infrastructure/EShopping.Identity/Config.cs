@@ -20,7 +20,9 @@ namespace EShopping.Identity
             new ApiScope[]
             {
                 new ApiScope("catalogapi"),
-                new ApiScope("basketapi")
+                new ApiScope("basketapi"),
+                new ApiScope("catalogapi.read"),
+                new ApiScope("catalogapi.write")
             };
 
         public static IEnumerable<ApiResource> ApiResources =>
@@ -29,7 +31,7 @@ namespace EShopping.Identity
                 // List of Microservices can go here.
                 new ApiResource("Catalog", "Catalog.API")
                 {
-                    Scopes = {"catalogapi"}
+                    Scopes = {"catalogapi.read", "catalogapi.write"}
                 },
                 new ApiResource("Basket", "Basket.API")
                 {
@@ -47,7 +49,7 @@ namespace EShopping.Identity
                     ClientId = "CatalogApiClient",
                     ClientSecrets = {new Secret("5c6eb3b4-61a7-4668-ac57-2b4591ec26d2".Sha256())},
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = {"catalogapi"}
+                    AllowedScopes = {"catalogapi.read", "catalogapi.write"}
                 },
                 new Client
                 {
