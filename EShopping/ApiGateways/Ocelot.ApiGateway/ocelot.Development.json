@@ -7,7 +7,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "80"
+          "Port": "9000"
         }
       ],
       "UpstreamPathTemplate": "/Catalog",
@@ -20,7 +20,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "80"
+          "Port": "9000"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetProductById/{id}",
@@ -32,7 +32,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "80"
+          "Port": "9000"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllProducts",
@@ -44,7 +44,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "80"
+          "Port": "9000"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllBrands",
@@ -56,7 +56,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "80"
+          "Port": "9000"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllTypes",
@@ -68,7 +68,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "80"
+          "Port": "9000"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetProductsByBrandName/{brand}",
@@ -81,7 +81,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "80"
+          "Port": "9001"
         }
       ],
       "UpstreamPathTemplate": "/Basket/GetBasket/{userName}",
@@ -93,7 +93,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "80"
+          "Port": "9001"
         }
       ],
       "UpstreamPathTemplate": "/Basket/DeleteBasket/{userName}",
@@ -105,7 +105,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "80"
+          "Port": "9001"
         }
       ],
       "UpstreamPathTemplate": "/Basket/CreateBasket",
@@ -120,7 +120,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "80"
+          "Port": "9001"
         }
       ],
       "UpstreamPathTemplate": "/Basket/Checkout",
@@ -140,7 +140,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "discount.api",
-          "Port": "80"
+          "Port": "9002"
         }
       ],
       "UpstreamPathTemplate": "/Discount/{productName}",
@@ -152,7 +152,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "discount.api",
-          "Port": "80"
+          "Port": "9002"
         }
       ],
       "UpstreamPathTemplate": "/Discount",
@@ -165,7 +165,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "ordering.api",
-          "Port": "80"
+          "Port": "9003"
         }
       ],
       "UpstreamPathTemplate": "/Order/{userName}",
