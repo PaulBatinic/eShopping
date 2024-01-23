@@ -59,6 +59,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShopping.Identity", "Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx", "nginx", "{A1E39257-04ED-4AA7-B704-08E6B536D581}"
 	ProjectSection(SolutionItems) = preProject
+		ApiGateways\nginx\id-local.conf = ApiGateways\nginx\id-local.conf
+		ApiGateways\nginx\id-local.crt = ApiGateways\nginx\id-local.crt
+		ApiGateways\nginx\id-local.key = ApiGateways\nginx\id-local.key
+		ApiGateways\nginx\id-local.pfx = ApiGateways\nginx\id-local.pfx
 		ApiGateways\nginx\nginx.Dockerfile = ApiGateways\nginx\nginx.Dockerfile
 		ApiGateways\nginx\nginx.local.conf = ApiGateways\nginx\nginx.local.conf
 	EndProjectSection
