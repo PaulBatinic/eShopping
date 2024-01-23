@@ -149,6 +149,6 @@ services:
     container_name: identityserver
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=9009
+      - ASPNETCORE_HTTP_PORTS=9011
     ports:
-      - "9009:9009"
+      - "9011:9011"
