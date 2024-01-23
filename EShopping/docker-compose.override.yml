@@ -97,7 +97,7 @@ services:
     container_name: basket.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=80
+      - ASPNETCORE_HTTP_PORTS=9001
       - "CacheSettings__ConnectionString=basketdb:6379"
       - "GrpcSettings__DiscountUrl=http://discount.api"
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
@@ -105,7 +105,7 @@ services:
       - basketdb
       - rabbitmq 
     ports:
-      - "9001:80"
+      - "9001:9001"
 
   discount.api:
     container_name: discount.api
