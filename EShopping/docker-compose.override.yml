@@ -1,6 +1,18 @@
 version: '3.4'
 
 services:
+  reverseproxy:
+    container_name: nginxgateway
+    restart: always
+    depends_on:
+      - identityserver
+      - catalog.api
+      - basket.api
+      - discount.api
+      - ordering.api
+    ports:
+      - "9200:9100"
+
   catalogdb:
     container_name: catalogdb
     restart: always
@@ -63,6 +75,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+
 
   catalog.api:
     container_name: catalog.api
