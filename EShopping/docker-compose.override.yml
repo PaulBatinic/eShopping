@@ -82,7 +82,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       # In .NET 8 default port has been changed from 80 to 8080 so setting the listening port here back to 80 explicitly
-      - ASPNETCORE_HTTP_PORTS=80
+      # - ASPNETCORE_HTTP_PORTS=80
+      # For Nginx gateway setting purposes in to 9000
+      - ASPNETCORE_HTTP_PORTS=9000
       - "DatabaseSettings__ConnectionString=mongodb://catalogdb:27017"
       - "DatabaseSettings__DatabaseName=CatalogDb"
       - "DatabaseSettings__CollectionName=Products"
