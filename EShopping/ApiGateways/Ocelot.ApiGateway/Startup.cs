@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Common.Logging;
+using Common.Logging.Correlation;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -13,6 +10,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
         services.AddOcelot()
             .AddCacheManager(o => o.WithDictionaryHandle());
     }
@@ -24,6 +22,7 @@ public class Startup
             app.UseDeveloperExceptionPage();
         }
 
+        app.AddCorrelationIdMiddleware();
         app.UseRouting();
 
         app.UseEndpoints(endpoints =>
