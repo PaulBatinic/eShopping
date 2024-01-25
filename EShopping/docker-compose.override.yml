@@ -75,6 +75,7 @@ services:
       - "DatabaseSettings__CollectionName=Products"
       - "DatabaseSettings__BrandsCollection=Brands"
       - "DatabaseSettings__TypesCollection=Types"
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
     depends_on:
       - catalogdb
     ports:
@@ -88,6 +89,7 @@ services:
       - "CacheSettings__ConnectionString=basketdb:6379"
       - "GrpcSettings__DiscountUrl=http://discount.api"
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
     depends_on:
       - basketdb
       - rabbitmq 
@@ -100,6 +102,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=80
       - "DatabaseSettings__ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=Password@1;"
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
     depends_on:
       - discountdb
     ports:
@@ -112,6 +115,7 @@ services:
       - ASPNETCORE_HTTP_PORTS=80
       - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Rahul1234567;Encrypt=True;TrustServerCertificate=True;"
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "ElasticConfiguration__Uri=http://elasticsearch:9200"
     depends_on:
       - orderdb
       - rabbitmq 
