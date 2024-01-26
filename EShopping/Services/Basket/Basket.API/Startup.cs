@@ -3,6 +3,8 @@ using Basket.Application.GrpcService;
 using Basket.Application.Handlers;
 using Basket.Core.Repositories;
 using Basket.Infrastructure.Repositories;
+using Common.Logging;
+using Common.Logging.Correlation;
 using Discount.Grpc.Protos;
 using HealthChecks.UI.Client;
 using MassTransit;
@@ -34,6 +36,7 @@ public class Startup
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateShoppingCartCommandHandler).GetTypeInfo().Assembly));
         services.AddScoped<IBasketRepository, BasketRepository>();
+        services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
         services.AddAutoMapper(typeof(Startup));
         services.AddScoped<DiscountGrpcService>();
         services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>

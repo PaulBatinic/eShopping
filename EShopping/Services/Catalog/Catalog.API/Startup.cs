@@ -7,6 +7,8 @@ using Catalog.Application.Handlers;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
+using Common.Logging;
+using Common.Logging.Correlation;
 using HealthChecks.UI.Client;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -34,6 +36,7 @@ public class Startup
     services.AddAutoMapper(typeof(Startup));
     // services.AddMediatR(typeof(CreateProductHandler).GetTypeInfo().Assembly);  // Per depricated MediatR DI NuGet Package
     services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateProductHandler).GetTypeInfo().Assembly));
+    services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
     services.AddScoped<ICatalogContext, CatalogContext>();
     services.AddScoped<IProductRepository, ProductRepository>();
     services.AddScoped<IBrandRepository, ProductRepository>();

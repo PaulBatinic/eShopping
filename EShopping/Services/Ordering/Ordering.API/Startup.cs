@@ -1,3 +1,4 @@
+using Common.Logging.Correlation;
 using EventBus.Messages.Common;
 using HealthChecks.UI.Client;
 using MassTransit;
@@ -24,6 +25,7 @@ public class Startup
         services.AddControllers();
         services.AddApiVersioning();
         services.AddApplicationServices();
+        services.AddScoped<ICorrelationIdGenerator, CorrelationIdGenerator>();
         services.AddInfraServices(Configuration);
         services.AddAutoMapper(typeof(Startup));
         services.AddSwaggerGen(c =>
