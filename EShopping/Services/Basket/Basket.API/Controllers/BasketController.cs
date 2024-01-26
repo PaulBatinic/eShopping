@@ -71,6 +71,7 @@ public class BasketController : ApiController
 
         var eventMesg = BasketMapper.Mapper.Map<BasketCheckoutEvent>(basketCheckout);
         eventMesg.TotalPrice = basket.TotalPrice;
+        eventMesg.CorrelationId = _correlationIdGenerator.Get();
         await _publishEndpoint.Publish(eventMesg);
 
         // Remove the basket
